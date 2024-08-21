@@ -1,0 +1,71 @@
+﻿@{
+  
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/CustomJs/FileData.js"></script>
+}
+<div class="container-fluid">
+
+    <div class="col-md-12">
+
+        <div class="card card-primary">
+
+            <div class="card-header bg-cyan">
+                @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12 col-lg-12 col-sm-12 row">
+                        <div class="col-md-4 col-lg-4 col-sm-4" style="align-self: center;">
+                            <h4 class="card-title"><b>DOWNLOAD FBR FILE(s)</b></h4>
+                        </div>
+
+                        <div class="col-md-8 col-lg-8 col-sm-8 row" style="align-self: center;">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group row">
+                                    <input type="file" id="fileUpload" name="fileUpload" class="btn btn-sm btn-success" accept=".xlsx, .xls" />
+                                </div>
+                            </div>
+
+                            <div class="offset-4 col-sm-2 col-md-2">
+                                <div class="form-group row">
+                                    <button type="submit" id="btnupload" style="float:right;" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-upload"></i>
+                                        Upload Excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+
+                <table id="tblFBRFile" class="table table-responsive-lg table-bordered" style="width:100%;">
+                    <thead class="bg-cyan">
+                        <tr>
+
+                            <th>S No.</th>
+
+                            <th>File Name</th>
+                            <th>File Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <table id="tblFileLog" class="table table-responsive-lg table-bordered" style="width:100%;">
+                    <thead class="bg-cyan">
+                        <tr>
+
+                            <th>S No.</th>
+
+                            <th>Process Log</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

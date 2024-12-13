@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ATL FILES</title>
+    <title>@ViewBag.Title - ATL AUTOMATION</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,16 +20,6 @@
     <link href="~/Content/DataTables/css/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Content/DataTables/css/buttons.bootstrap4.min.css" rel="stylesheet" />
     @*<link href="~/Content/plugins/chart.js/Chart.min.css" rel="stylesheet" />*@
-    <style>
-        .nav-link {
-            color: white !important;
-        }
-
-        .btn-primary {
-            background: darkcyan !important;
-            border-color: darkcyan !important;
-        }
-    </style>
 </head>
 <body class="sidebar-collapse">
     <!-- Site wrapper -->
@@ -45,8 +35,9 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color:grey!important"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
+               
             </ul>
 
             <!-- Right navbar links -->
@@ -55,13 +46,16 @@
                 <li class="nav-item">
                     @{
 
-                        if (ATL_UPLOAD.Models.AppSession.Session != null)
+                        if (SessionMenu.Lib.Models.AppSession.Session != null &&
+                            SessionMenu.Lib.Models.AppSession.Session.SessionRepo.Count>0)
                         {
-                            <a href="#" class="nav-link" style="color:grey!important"><b><span> <span class="hidden-xs">@(ATL_UPLOAD.Models.AppSession.Session.username.ToUpper())</span></span></b></a>
+                            <a href="#" class="nav-link"><b><span> <span class="hidden-xs">
+                                @(SessionMenu.Lib.Models.AppSession.Session.SessionRepo[0].usr_full_nme)
+                                   </span></span></b></a>
                         }
                         else
                         {
-                            <a href="#" class="nav-link" style="color:grey!important"><b><span> <span class="hidden-xs">Anonymous User</span></span></b></a>
+                            <a href="#" class="nav-link"><b><span> <span class="hidden-xs">Anonymous User</span></span></b></a>
                         }
                     }
 
@@ -69,20 +63,20 @@
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    @*<a class="nav-link" style="color:grey!important" data-toggle="dropdown" href="#" title="Log Out" onclick="Logout()">
+                    <a class="nav-link" data-toggle="dropdown" href="#" title="Log Out" onclick="Logout()">
                         <i class="fa fa-sign-out-alt"></i>
                         <span class="badge badge-danger navbar-badge"></span>
-                    </a>*@
+                    </a>
 
                 </li>
             </ul>
         </nav>
         <!-- /.navbar -->
-        <aside class="main-sidebar sidebar-primary elevation-4 bg-cyan">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link bg-info">
+            <a href="#" class="brand-link">
                 <img src="~/Content/dist/img/JSLOGO.jpg" alt="Js Bank" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">JSBL - ATL Excel Upload</span>
+                <span class="brand-text font-weight-light">JSBL - ATL UPLOAD</span>
             </a>
 
             <!-- Sidebar -->
@@ -92,14 +86,6 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul id="sidebarcustom" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Index">
-                                <i class="far fa-eye nav-icon"></i><p>
-                                   Upload Excel
-                                </p>
-                            </a>
-                        </li>
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -115,6 +101,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
+                                @*<li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard v3</li>*@
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -130,67 +118,85 @@
                 <p>&copy; @DateTime.Now.Year - JS Bank Ltd - Ancillary Apps.</p>
             </footer>
         </div>
-    </div>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="~/Content/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/dist/js/adminlte.js"></script>
+        </div>
+        <!-- jQuery -->
+        <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="~/Content/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Content/dist/js/adminlte.js"></script>
 
-    @*<script src="~/Content/plugins/moment/datetime.js"></script>*@
-    <script src="~/Content/plugins/chart.js/Chart.min.js"></script>
-    <script src="~/Content/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="~/Content/plugins/moment/moment.min.js"></script>
-    <script src="~/Content/plugins/inputmask/jquery.inputmask.min.js"></script>
-    <script src="~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="~/Content/plugins/moment/datetime.js"></script>
+        <script src="~/Content/plugins/chart.js/Chart.min.js"></script>
+        <script src="~/Content/plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="~/Content/plugins/moment/moment.min.js"></script>
+        <script src="~/Content/plugins/inputmask/jquery.inputmask.min.js"></script>
+        <script src="~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <script src="~/Content/DataTables/jquery.dataTables.min.js"></script>
-
-
-    <script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
-    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
-    <script src="~/Scripts/DataTables/responsive.bootstrap4.min.js"></script>
-    <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
-    <script src="~/Scripts/DataTables/buttons.bootstrap4.min.js"></script>
-    <script src="~/Scripts/DataTables/buttons.html5.min.js"></script>
-    <script src="~/Scripts/DataTables/buttons.print.min.js"></script>
-    <script src="~/Scripts/DataTables/buttons.colVis.js"></script>
-    <script src="~/Scripts/DataTables/jszip.min.js"></script>
-    <script src="~/Scripts/DataTables/pdfmake.min.js"></script>
-    <script src="~/Scripts/DataTables/vfs_fonts.js"></script>
-
-    <script type="text/javascript">
-
-        $('.expdate').datetimepicker({
-            format: 'L',
-        });
-        $('.Inqdate').datetimepicker({
-            format: 'yyyy-MM-DD',
-        });
-        $('.ftdate').datetimepicker({
-            format: 'L',
-        });
-        $('.isdate').datetimepicker({
-
-            format: 'L',
-            maxDate: 'now',
-            // defaultDate: moment(),
-            sideBySide: true
-        });
+        <script src="~/Content/DataTables/jquery.dataTables.min.js"></script>
 
 
-      
-    </script>
-    @RenderSection("scripts", required: false)
+        <script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+        <script src="~/Scripts/DataTables/responsive.bootstrap4.min.js"></script>
+        <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+        <script src="~/Scripts/DataTables/buttons.bootstrap4.min.js"></script>
+        <script src="~/Scripts/DataTables/buttons.html5.min.js"></script>
+        <script src="~/Scripts/DataTables/buttons.print.min.js"></script>
+        <script src="~/Scripts/DataTables/buttons.colVis.js"></script>
+        <script src="~/Scripts/DataTables/jszip.min.js"></script>
+        <script src="~/Scripts/DataTables/pdfmake.min.js"></script>
+        <script src="~/Scripts/DataTables/vfs_fonts.js"></script>
+
+        <script src="~/Scripts/SidebarCustom.js"></script>
+        <script type="text/javascript">
+
+            /* $(".expdate").datepicker();*/
+            $('.expdate').datetimepicker({
+                format: 'L',
+
+            });
+            $('.Inqdate').datetimepicker({
+                format: 'yyyy-MM-DD',
+
+            });
+            $('.ftdate').datetimepicker({
+                format: 'L',
+
+            }); $('.isdate').datetimepicker({
+                format: 'L',
+                maxDate: 'now'
+            });
+            //$(".expdate").on("change", function () {
+            //    var selected = $(this).val();
+            //    alert(selected);
+            //});
+
+
+            $(document).ready(function () {
+                GetTree();
+            });
+            function Logout() {
+                localStorage.clear();
+                $.ajax({
+                    url: '/Search/Logout/',
+                    dataType: 'json',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        window.location.href = response;
+                    }
+                });
+            }
+        </script>
+        @RenderSection("scripts", required: false)
 </body>
 </html>

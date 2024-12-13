@@ -1,0 +1,22 @@
+{
+  "Sources": [
+    {
+      "SrcId": 1,
+      "SrcFolder": "D:\\Faiz Projects\\ATL EXCEL PROCESS\\Actual File\\CBS",
+      "SrcType": "local",
+      "SrcStatus": true
+    }
+  ],
+  "Destinations": [
+    {
+      "SrcId": 1,
+      "DestType": "sftp",
+      "DestEndPoint": "10.111.201.243",
+      "DestUsr": "6a7ey2cSF9wfrBeAIPmFSg==",
+      "DestPwd": "6rbySskTpemWtKDqReAmvg==",
+      "DestFolder": "/home/t24dev/FBR_FILES/"
+
+    }
+  ],
+  "Ek": "cD4+zlhbMb0574h40QDv2FPzwESS9JZZ6GHOpZ0Y03LcmpqjEAKMD29wctdgrJbj"
+}

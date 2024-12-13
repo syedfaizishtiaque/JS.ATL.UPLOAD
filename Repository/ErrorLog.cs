@@ -46,6 +46,11 @@ namespace ATL_UPLOAD.Repository
 
         public static void WriteLog(string eventId, string filelocation)
         {
+            filelocation = string.IsNullOrEmpty(filelocation) ? AppDomain.CurrentDomain.BaseDirectory + "\\ProcessLog\\" + DateTime.Now.ToString("ddMMyyy") + "_ProcessLog.txt": filelocation;
+            if (!Directory.Exists(Path.GetDirectoryName(filelocation)))
+            {
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ProcessLog\\");
+            }
             if (!File.Exists(filelocation))
             {
                 using (StreamWriter sw = File.CreateText(filelocation))

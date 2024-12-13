@@ -1,6 +1,7 @@
 ﻿using ATL_UPLOAD.Models;
 using ATL_UPLOAD.Repository;
 using Microsoft.AspNetCore.Http.Internal;
+using SessionMenu.Lib.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,15 +13,28 @@ using System.Web.Mvc;
 
 namespace ATL_UPLOAD.Controllers
 {
-   
+   [SessionAuth]
     public class HomeController : Controller
     {
         public HomeController()
         {
             var appSession = new AppSessionRepo();
+           
+           
         }
         public ActionResult Index()
         {
+            try
+            {
+                if (AppSession.Session == null || AppSession.Session.SessionRepo.Count == 0)
+                {
+                    return RedirectToAction("UnAuthorized", "Search");
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("UnAuthorized", "Search");
+            }
             return View();
         }
         [HttpPost]
@@ -166,20 +180,41 @@ namespace ATL_UPLOAD.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                ErrorLog.WriteException(ex.ToString(), "DownloadFileByPath");
+                throw ex;
             }
-
-
             return File(memory, GetContentType(filePath), fileName);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> UploadFile(string file_name)
+        {
+            string stream = "File has been Uploaded Successfully";
+            try
+            {
+                using (serv_SFTP sftp = new serv_SFTP())
+                {
+                    bool result = await sftp.ReadSFTPConfigandProcess(file_name);
+                    if (!result)
+                    {
+                        stream = "Failed to Upload File";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                stream = "Failed to Upload File";
+                ErrorLog.WriteException(ex.ToString(), "UploadFile");
+            }
+            var jsonresult = Json(data: stream, JsonRequestBehavior.AllowGet);
+            jsonresult.MaxJsonLength = 500000000;
+            return jsonresult;
+        }
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();
             var ext = Path.GetExtension(path).ToLowerInvariant();
             return types[ext];
         }
-
         private Dictionary<string, string> GetMimeTypes()
         {
             return new Dictionary<string, string>

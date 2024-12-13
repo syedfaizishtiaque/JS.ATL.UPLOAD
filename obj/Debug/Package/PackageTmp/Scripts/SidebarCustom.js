@@ -13,8 +13,7 @@
             //dataType: "json",
             success: function (response) {
                                // data = JSON.parse(response.data);
-               // console.log(response);
-                              // loadTree(response);
+                               loadTree(response);
                            },
             error: function (response) {
                 console.log(response);

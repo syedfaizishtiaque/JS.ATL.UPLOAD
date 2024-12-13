@@ -1,0 +1,29 @@
+9/4/2024 12:09:34 PM
+------------------------------
+Error Connecting System.ArgumentException: Empty path name is not legal.
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append)
+   at System.IO.File.CreateText(String path)
+   at ATL_UPLOAD.Repository.ErrorLog.WriteLog(String eventId, String filelocation) in D:\Development Projects\JS.ATL.UPLOAD\Repository\ErrorLog.cs:line 51
+   at ATL_UPLOAD.Repository.serv_SFTP.<ConnectSftp>d__7.MoveNext() in D:\Development Projects\JS.ATL.UPLOAD\Repository\serv_SFTP.cs:line 123
+9/4/2024 12:16:30 PM
+------------------------------
+Error Connecting System.IO.DirectoryNotFoundException: Could not find a part of the path 'D:\Development Projects\JS.ATL.UPLOAD\ProcessLog\04092024_ProcessLog.txt'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append)
+   at System.IO.File.CreateText(String path)
+   at ATL_UPLOAD.Repository.ErrorLog.WriteLog(String eventId, String filelocation) in D:\Development Projects\JS.ATL.UPLOAD\Repository\ErrorLog.cs:line 52
+   at ATL_UPLOAD.Repository.serv_SFTP.<ConnectSftp>d__7.MoveNext() in D:\Development Projects\JS.ATL.UPLOAD\Repository\serv_SFTP.cs:line 123
+9/4/2024 12:16:30 PM
+------------------------------
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'D:\Development Projects\JS.ATL.UPLOAD\ProcessLog\04092024_ProcessLog.txt'.
+   at ATL_UPLOAD.Repository.serv_SFTP.<ConnectSftp>d__7.MoveNext() in D:\Development Projects\JS.ATL.UPLOAD\Repository\serv_SFTP.cs:line 133
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at ATL_UPLOAD.Repository.serv_SFTP.<ReadSFTPConfigandProcess>d__5.MoveNext() in D:\Development Projects\JS.ATL.UPLOAD\Repository\serv_SFTP.cs:line 52
